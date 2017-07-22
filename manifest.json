@@ -16,7 +16,8 @@
   },
   "permissions": [
       "contextMenus",
-      "clipboardWrite"
+      "clipboardWrite",
+      "alarms"
   ],
   "background": {
     "scripts": ["background.js"]

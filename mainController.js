@@ -45,10 +45,21 @@ var render = function(games, todays_date){
   var source   = $("#game-table-template").html();
   var template = Handlebars.compile(source);
   for (var i = 0; i < games.length; i++) {
-    var newRow = '<tr class="game' + i + '"></tr>'
+    var newRow = '<tr class="game' + i + ' game-row"></tr>'
     $('#game-table').append(newRow);
     $('.game' + i).html(template(games[i]));
+    $('.game' + i).css('height', 65);
   }
+  // document.getElementById('doc').height = (150 + (50 * games.length));
+  // $('html').height( 0 + 'px' );
+  // chrome.browserAction.setPopup({popup: "popup.html"});
+  // window.resizeTo(250, 10);
+  // $('html').css('height', ( 0 ));
+  // $('html').css('height', ( 0 ));
+  document.body.style.height = '0px';
+  document.body.style.minHeight = '0px';
+  document.documentElement.style.height = '0px';
+  document.documentElement.style.minHeight = '0px';
   // $('#test-content').html(template(context));
 };
 

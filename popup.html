@@ -1,4 +1,4 @@
-<html>
+<html id="doc">
 	<head>
 		<script src="firebase-app.js"></script>
 		<script src="handlebars-v4.0.10.js"></script>
@@ -6,16 +6,26 @@
 		<script src="jquery-3.2.1.slim.min.js"></script>
 		<script src="moment.js"></script>
 		<script src="moment-timezone.js"></script>
-		<script src="content.js"></script>
 		<script src="db.js"></script>
 		<script src="mainController.js"></script>
 		<script src="bootstrap.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="bootstrap.min.css">
 		<style>
+			@font-face {
+				font-family: 'Roboto'; /*a name to be used later*/
+
+				src: url('../roboto/Roboto-regular.ttf');
+			}
 			.game-info{
 				padding-left: 10px;
 				padding-right: 10px;
 				color: white;
+				font-family: "Roboto";
+				font-size: 25px;
+			}
+			.game-row{
+				border-width: 1px;
+				border-color: white;
 			}
 			.big-container{
 			}
@@ -26,26 +36,22 @@
 				padding-left: 10px;
 				/*width: 200px;*/
 			}
-			#previous_game{
-				/*width:100px;*/
-			}
-			#next_game{
-				/*width:100px;*/
-			}
 			#todays-date{
 				width: 200px;
+				font-family: "Roboto";
+				font-size: 18px;
 			}
 			.nav-button{
 				float: right;
 				color: white;
-				background-color: #333333;
+				background-color: #000000;
 				border-color: white;
 				border-width: 0px;
 			}
 			.region-button{
 				float: left;
 				color: white;
-				background-color: #333333;
+				background-color: #000000;
 				border-color: white;
 				border-width: 0px;
 			}
@@ -53,14 +59,28 @@
 				padding-top: 10px;
 			}
 			body{
-				width: 250px;
-				background-color: #666666;
+				width: 500px;
+				background-color: #1a1a1a;
+			}
+			html{
+				min-width: 0px;
+				min-height: 0px;
 			}
 			.nav{
-				background-color: #333333;
+				background-color: #000000;
 			}
 			.header-text{
 				color: white;
+				font-family: "Roboto";
+				font-size: 18px;
+			}
+			#game-table{
+				margin-bottom: 5px;
+				border-collapse: collapse;
+			}
+			#game-table.game-row{
+				border-width: medium !important;
+				border-color: white !important;
 			}
 		</style>
 	</head>
@@ -92,9 +112,11 @@
 	</body>
  </html>
 <script id="game-table-template" type="text/x-handlebars-template">
-	<td class="game-info"><h5>{{time}}</h5></td>
+	<td class="game-info"><h4>{{time}}</h4></td>
 	<td class="game-info">{{team1}}</td>
-	<td class="game-info"><h6>vs</h6></td>
+	<td class="game-info"><img src="../na-icons/{{team1}}.png"/></td>
+	<td class="game-info"><h5>vs</h5></td>
+	<td class="game-info"><img src="../na-icons/{{team2}}.png"/></td>
 	<td class="game-info">{{team2}}</td>
 </script>
 <script id="current-date-template" type="text/x-handlebars-template"><span>{{day}}, {{date}}</span></script>
