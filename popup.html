@@ -1,0 +1,100 @@
+<html>
+	<head>
+		<script src="firebase-app.js"></script>
+		<script src="handlebars-v4.0.10.js"></script>
+		<script src="firebase-database.js"></script>
+		<script src="jquery-3.2.1.slim.min.js"></script>
+		<script src="moment.js"></script>
+		<script src="moment-timezone.js"></script>
+		<script src="content.js"></script>
+		<script src="db.js"></script>
+		<script src="mainController.js"></script>
+		<script src="bootstrap.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+		<style>
+			.game-info{
+				padding-left: 10px;
+				padding-right: 10px;
+				color: white;
+			}
+			.big-container{
+			}
+			.big-container > * {
+				text-align: center;
+			}
+			.game-date{
+				padding-left: 10px;
+				/*width: 200px;*/
+			}
+			#previous_game{
+				/*width:100px;*/
+			}
+			#next_game{
+				/*width:100px;*/
+			}
+			#todays-date{
+				width: 200px;
+			}
+			.nav-button{
+				float: right;
+				color: white;
+				background-color: #333333;
+				border-color: white;
+				border-width: 0px;
+			}
+			.region-button{
+				float: left;
+				color: white;
+				background-color: #333333;
+				border-color: white;
+				border-width: 0px;
+			}
+			.buttons{
+				padding-top: 10px;
+			}
+			body{
+				width: 250px;
+				background-color: #666666;
+			}
+			.nav{
+				background-color: #333333;
+			}
+			.header-text{
+				color: white;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container-fullwidth nav">
+			<div class=""><button id="select-na" class="region-button btn btn-primary">NA</button></div>
+			<div class=""><button id="select-eu" class="region-button btn btn-primary">EU</button></div>
+			<div class=""><button id="next_game" class="nav-button btn btn-primary">></button></div>
+			<div class=""><button id="previous_game" class="nav-button btn btn-primary"><</button></div>
+		</div>
+		<div class="container-fluid big-container">
+				<div class="container" style="padding-top:10px;">
+						<span class="header-text">
+							NA LCS
+						</span><br />
+						<span id="todays-date" class="game-date header-text">
+						</span>
+
+					</div>
+
+				<table id="game-table">
+				</table>
+
+		</div>
+
+					<!-- <h4>{{game2.time}}</h4> -->
+			<div> </div>
+		</div>
+	</body>
+ </html>
+<script id="game-table-template" type="text/x-handlebars-template">
+	<td class="game-info"><h5>{{time}}</h5></td>
+	<td class="game-info">{{team1}}</td>
+	<td class="game-info"><h6>vs</h6></td>
+	<td class="game-info">{{team2}}</td>
+</script>
+<script id="current-date-template" type="text/x-handlebars-template"><span>{{day}}, {{date}}</span></script>
