@@ -15,6 +15,7 @@ var processGame = function(game){
       team2: values[1].toUpperCase(),
       time: convertTime(values[2]),
       victor: values[3],
+      hasVictor: values[3] !== 'na'
     };
 };
 
@@ -46,7 +47,9 @@ var render = function(games, todays_date){
   var template = Handlebars.compile(source);
   for (var i = 0; i < games.length; i++) {
     var newRow = '<tr class="game' + i + ' game-row"></tr>'
+    var newRowButtons = '<tr class="game-subinfo"><td><button class="btn btn-xs notify-me-btn">Notify me</button></td></tr>';
     $('#game-table').append(newRow);
+    $('#game-table').append(newRowButtons);
     $('.game' + i).html(template(games[i]));
     $('.game' + i).css('height', 65);
   }
@@ -98,6 +101,17 @@ var getFirstGame = function(db){
 
 
 // document.addEventListener('DOMContentLoaded', function () {
+
+Handlebars.registerHelper("checkIfWon", function(team, victor) {
+  team = team.toString().toLowerCase();
+  victor = victor.toString().toLowerCase();
+  if (team === victor) {
+      return new Handlebars.SafeString("<span style='color:gold;' class='victor-text'>WIN</span>");
+  }
+  else {
+      return new Handlebars.SafeString("<span style='color:red;' class='victor-text'>LOSS</span>");
+  }
+});
 
 db = new Database();
   // console.log(getNextGames('NA', moment(), db));

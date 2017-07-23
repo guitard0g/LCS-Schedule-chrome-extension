@@ -14,7 +14,17 @@
 			@font-face {
 				font-family: 'Roboto'; /*a name to be used later*/
 
-				src: url('../roboto/Roboto-regular.ttf');
+				src: url('../roboto/Roboto-Regular.ttf');
+			}
+			@font-face {
+				font-family: 'Roboto-Medium'; /*a name to be used later*/
+
+				src: url('../roboto/Roboto-Medium.ttf');
+			}
+			@font-face {
+				font-family: 'Roboto-Bold'; /*a name to be used later*/
+
+				src: url('../roboto/Roboto-Bold.ttf');
 			}
 			.game-info{
 				padding-left: 10px;
@@ -71,16 +81,25 @@
 			}
 			.header-text{
 				color: white;
-				font-family: "Roboto";
-				font-size: 18px;
+				font-family: "Roboto-Medium";
+				font-size: 25px;
+			}
+			.notify-me-btn{
+				color: white;
+				background-color: #000000;
 			}
 			#game-table{
-				margin-bottom: 5px;
+				margin-bottom: 10px;
 				border-collapse: collapse;
 			}
 			#game-table.game-row{
 				border-width: medium !important;
 				border-color: white !important;
+			}
+			.victor-text{
+				color: gold;
+				font-family: "Roboto-Medium";
+				font-size: 15px;
 			}
 		</style>
 	</head>
@@ -113,10 +132,22 @@
  </html>
 <script id="game-table-template" type="text/x-handlebars-template">
 	<td class="game-info"><h4>{{time}}</h4></td>
-	<td class="game-info">{{team1}}</td>
+	<td class="game-info">{{team1}}
+			{{#if hasVictor}}
+				<br />
+				<div class="col-xs-12" style="height:10px;"></div>
+				{{{checkIfWon team1 victor}}}
+			{{/if}}
+	</td>
 	<td class="game-info"><img src="../na-icons/{{team1}}.png"/></td>
 	<td class="game-info"><h5>vs</h5></td>
 	<td class="game-info"><img src="../na-icons/{{team2}}.png"/></td>
-	<td class="game-info">{{team2}}</td>
+	<td class="game-info">{{team2}}
+			{{#if hasVictor}}
+				<br />
+				<div class="col-xs-12" style="height:10px;"></div>
+				{{{checkIfWon team2 victor}}}
+			{{/if}}
+	</td>
 </script>
 <script id="current-date-template" type="text/x-handlebars-template"><span>{{day}}, {{date}}</span></script>
