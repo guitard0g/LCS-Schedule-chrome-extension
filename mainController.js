@@ -47,40 +47,38 @@ var render = function(games, todays_date){
   var template = Handlebars.compile(source);
   for (var i = 0; i < games.length; i++) {
     var newRow = '<tr class="game' + i + ' game-row"></tr>'
-    var newRowButtons = '<tr class="game-subinfo"><td><button class="btn btn-xs notify-me-btn">Notify me</button></td></tr>';
+    var newRowButtons = '<tr class="game-subinfo"><td><button class="btn btn-xs notify-me-btn" id="game' + i + '-notif">Notify me</button></td></tr>';
     $('#game-table').append(newRow);
     $('#game-table').append(newRowButtons);
     $('.game' + i).html(template(games[i]));
     $('.game' + i).css('height', 65);
+    document.getElementById('game' + i + '-notif').addEventListener('click', notify.bind(
+      {
+        team1: games[i].team1,
+        team2: games[i].team2,
+        date: todays_date,
+        time: games[i].time
+      }
+    ));
   }
-  // document.getElementById('doc').height = (150 + (50 * games.length));
-  // $('html').height( 0 + 'px' );
-  // chrome.browserAction.setPopup({popup: "popup.html"});
-  // window.resizeTo(250, 10);
-  // $('html').css('height', ( 0 ));
-  // $('html').css('height', ( 0 ));
   document.body.style.height = '0px';
   document.body.style.minHeight = '0px';
   document.documentElement.style.height = '0px';
   document.documentElement.style.minHeight = '0px';
-  // $('#test-content').html(template(context));
 };
 
 var nextGame = function(){
   db.getNextGameday('NA').then(function(snapshot){
     var context = parseGame(snapshot.val().matches);
     render(context, snapshot.key);
-    console.log('next day: ' + snapshot.key);
     db.setMoment(snapshot.key);
   });
 }
 
 var previousGame = function() {
-  console.log('PREVIOUS GAME')
   db.getPreviousGameday('NA').then(function(snapshot){
     var context = parseGame(snapshot.val().matches);
     render(context, snapshot.key);
-    console.log('previous day: ' + snapshot.key);
     db.setMoment(snapshot.key);
   });
 }
@@ -100,7 +98,6 @@ var getFirstGame = function(db){
 };
 
 
-// document.addEventListener('DOMContentLoaded', function () {
 
 Handlebars.registerHelper("checkIfWon", function(team, victor) {
   team = team.toString().toLowerCase();
@@ -121,6 +118,8 @@ db.getTodaysGameday('NA').then(function(snapshot){
   render(context, snapshot.key);
   db.setMoment(snapshot.key);
   addListeners();
+}, function(){
+  console.log('rejected');
 });
   // var initialContext = parseGame(getTodaysGames('NA', moment(), db));
   // render(initialContext);

@@ -7,7 +7,8 @@
 	    "matches": [
 	      "<all_urls>"
 	    ],
-	    "js": ["bootstrap.min.js","handlebars-v4.0.10.js","firebase-app.js","firebase-database.js","jquery-3.2.1.slim.min.js","moment.js","moment-timezone.js","db.js", "mainController.js"]
+	    "js": ["content.js", "moment.js"],
+      "run_at": "document_start"
 	  }
   ],
   "browser_action": {
@@ -17,10 +18,14 @@
   "permissions": [
       "contextMenus",
       "clipboardWrite",
-      "alarms"
+      "alarms",
+      "notifications",
+      "background",
+      "storage"
   ],
   "background": {
-    "scripts": ["background.js"]
+    "scripts": ["notifHandler.js", "bootstrap.min.js","handlebars-v4.0.10.js","firebase-app.js","firebase-database.js","jquery-3.2.1.slim.min.js","moment.js","moment-timezone.js","db.js", "mainController.js"],
+    "persistent": false
   },
   "content_security_policy":"script-src 'self' 'unsafe-eval' https://www.gstatic.com/ https://*.firebaseio.com https://www.googleapis.com; object-src 'self'"
 
