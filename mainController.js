@@ -68,7 +68,7 @@ var render = function(games, todays_date){
 };
 
 var nextGame = function(){
-  db.getNextGameday('NA').then(function(snapshot){
+  db.getNextGameday().then(function(snapshot){
     var context = parseGame(snapshot.val().matches);
     render(context, snapshot.key);
     db.setMoment(snapshot.key);
@@ -76,7 +76,7 @@ var nextGame = function(){
 }
 
 var previousGame = function() {
-  db.getPreviousGameday('NA').then(function(snapshot){
+  db.getPreviousGameday().then(function(snapshot){
     var context = parseGame(snapshot.val().matches);
     render(context, snapshot.key);
     db.setMoment(snapshot.key);
@@ -87,16 +87,6 @@ var addListeners = function(){
   document.getElementById('next_game').addEventListener('click', nextGame);
   document.getElementById('previous_game').addEventListener('click', previousGame);
 };
-
-var getFirstGame = function(db){
-  db.getNextGameday('NA').then(function(snapshot){
-    var context = parseGame(snapshot.val().matches);
-    render(context);
-    db.setMoment(snapshot.key);
-    addListeners();
-  });
-};
-
 
 
 Handlebars.registerHelper("checkIfWon", function(team, victor) {
@@ -111,9 +101,8 @@ Handlebars.registerHelper("checkIfWon", function(team, victor) {
 });
 
 db = new Database();
-  // console.log(getNextGames('NA', moment(), db));
-  // getAllGames('NA', db);
-db.getTodaysGameday('NA').then(function(snapshot){
+
+db.getTodaysGameday().then(function(snapshot){
   var context = parseGame(snapshot.val().matches);
   render(context, snapshot.key);
   db.setMoment(snapshot.key);
@@ -121,16 +110,3 @@ db.getTodaysGameday('NA').then(function(snapshot){
 }, function(){
   console.log('rejected');
 });
-  // var initialContext = parseGame(getTodaysGames('NA', moment(), db));
-  // render(initialContext);
-  // console.log(moment().format('MMMM Do YYYY, h:mm:ss a'));
-	// console.log( getCurrentTime().dayOfWeek );
-  // var context = {
-  //   title: "lul will this actually work"
-  // };
-  // var source   = $("#header-template").html();
-  // var template = Handlebars.compile(source);
-  //
-  // $('#test-content').html(template(context));
-
-// });

@@ -20,7 +20,7 @@ var notify = function(){
 
 chrome.alarms.onAlarm.addListener(function(alarm){
   var tokens = alarm.name.split(':');
-  var alarmMessage = tokens[1] + ' vs. ' + tokens[2] + ' is starting!\nhttps://www.twitch.tv.';
+  var alarmMessage = tokens[1] + ' vs. ' + tokens[2] + ' is starting!';
   var options = {
     type: "basic",
     title: "LCS Game Starting!",
@@ -31,6 +31,7 @@ chrome.alarms.onAlarm.addListener(function(alarm){
   chrome.notifications.create('lcsnotif', options, function(){});
 });
 
+// COME BACK FOR ADDING LINKS TO NOTIFS, BUT RECALL IT ACTIVATES TWO NEW TABS FOR SOME REASON
 // chrome.notifications.onClicked.addListener(function(notifId){
 //   if (notifId === 'lcsnotif') {
 //     alert('test');

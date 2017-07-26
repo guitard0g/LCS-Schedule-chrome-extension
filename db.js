@@ -1,24 +1,3 @@
-  // Initialize Firebase
-document.addEventListener('DOMContentLoaded', function () {
-	// var el = document.getElementById('button-id');
-	// if(el){
-  //   $("input").keypress(function(event) {
-  //   });
-	// 	el.addEventListener("click", dank );
-	// }
-
-  // getNextGame('NA', moment(), myDb);
-  // var ref = myDb.ref('/NA/matches/2017-07-16');
-  // getTodaysGames('NA', moment(), myDb);
-  // getNextGames('NA', moment(), myDb);
-  // getPreviousGames('NA', moment(), myDb);
-  // momen.add(1, 'days');
-  // ref.orderByChild("matches").equalTo(date).on("child_added", function(snapshot) {
-  //   console.log('secondCase');
-  //   console.log(snapshot.val());
-  // });
-});
-
 
 function Database(){
   var config = {
@@ -35,38 +14,48 @@ function Database(){
 
   this.moment = moment();
 
+	this.region = 'NA';
+
+	this.setRegion = function(reg){
+		this.region = reg;
+	}
+
+	this.getRegion = function(){
+		return this.region;
+	}
+
   this.setMoment = function(newTime){
     this.moment = moment(newTime, 'YYYY-MM-DD');
   }
 
   // function to get todays gameday or the next gameday relative to a moment
   // returns a Promise
-  this.getTodaysGameday = function(region, moment){
+  this.getTodaysGameday = function(){
     var date = this.moment.format('YYYY-MM-DD');
 		// console.log(date);
-    var ref = this.dbConnection.ref('/' + region + '/matches');
+    var ref = this.dbConnection.ref('/' + this.region + '/matches');
     return ref.orderByKey().startAt(date).limitToFirst(1).once('child_added');
   };
 
   // function to get the next gameday relative to a moment
   // returns a Promise
-  this.getNextGameday = function(region){
+  this.getNextGameday = function(){
 
 		// a little hack to make a copy of our moment and add 1 day
 		var date = moment(this.moment.format('YYYY-MM-DD'), 'YYYY-MM-DD').add(1, 'days').format('YYYY-MM-DD');
 
 
 		// console.log(date);
-    var ref = this.dbConnection.ref('/' + region + '/matches');
+    var ref = this.dbConnection.ref('/' + this.region + '/matches');
     return ref.orderByKey().startAt(date).limitToFirst(1).once('child_added');
   };
 
   // function to get the previous gameday relative to a moment
   // returns a Promise
-  this.getPreviousGameday = function(region){
+  this.getPreviousGameday = function(){
 		var date = moment(this.moment.format('YYYY-MM-DD'), 'YYYY-MM-DD').subtract(1, 'days').format('YYYY-MM-DD');
 		// console.log(date);
-    var ref = this.dbConnection.ref('/' + region + '/matches');
+    var ref = this.dbConnection.ref('/' + this.region + '/matches');
     return ref.orderByKey().endAt(date).limitToLast(1).once('child_added');
   };
 }

@@ -7,7 +7,7 @@
 	    "matches": [
 	      "<all_urls>"
 	    ],
-	    "js": ["content.js", "moment.js"],
+	    "js": ["content.js", "libraries/moment.js"],
       "run_at": "document_start"
 	  }
   ],
@@ -24,7 +24,7 @@
       "storage"
   ],
   "background": {
-    "scripts": ["notifHandler.js", "bootstrap.min.js","handlebars-v4.0.10.js","firebase-app.js","firebase-database.js","jquery-3.2.1.slim.min.js","moment.js","moment-timezone.js","db.js", "mainController.js"],
+    "scripts": ["notifHandler.js", "db.js", "mainController.js"],
     "persistent": false
   },
   "content_security_policy":"script-src 'self' 'unsafe-eval' https://www.gstatic.com/ https://*.firebaseio.com https://www.googleapis.com; object-src 'self'"

@@ -1,108 +1,17 @@
 <html id="doc">
 	<head>
-		<script src="firebase-app.js"></script>
-		<script src="handlebars-v4.0.10.js"></script>
-		<script src="firebase-database.js"></script>
-		<script src="jquery-3.2.1.slim.min.js"></script>
-		<script src="moment.js"></script>
-		<script src="moment-timezone.js"></script>
+		<script src="libraries/firebase-app.js"></script>
+		<script src="libraries/handlebars-v4.0.10.js"></script>
+		<script src="libraries/firebase-database.js"></script>
+		<script src="libraries/jquery-3.2.1.slim.min.js"></script>
+		<script src="libraries/moment.js"></script>
+		<script src="libraries/moment-timezone.js"></script>
 		<script src="notifHandler.js"></script>
 		<script src="db.js"></script>
 		<script src="mainController.js"></script>
-		<script src="bootstrap.min.js"></script>
-		<link rel="stylesheet" type="text/css" href="bootstrap.min.css">
-		<style>
-			@font-face {
-				font-family: 'Roboto'; /*a name to be used later*/
-
-				src: url('../roboto/Roboto-Regular.ttf');
-			}
-			@font-face {
-				font-family: 'Roboto-Medium'; /*a name to be used later*/
-
-				src: url('../roboto/Roboto-Medium.ttf');
-			}
-			@font-face {
-				font-family: 'Roboto-Bold'; /*a name to be used later*/
-
-				src: url('../roboto/Roboto-Bold.ttf');
-			}
-			.game-info{
-				padding-left: 10px;
-				padding-right: 10px;
-				color: white;
-				font-family: "Roboto";
-				font-size: 25px;
-			}
-			.game-row{
-				border-width: 1px;
-				border-color: white;
-			}
-			.big-container{
-			}
-			.big-container > * {
-				text-align: center;
-			}
-			.game-date{
-				padding-left: 10px;
-				/*width: 200px;*/
-			}
-			#todays-date{
-				width: 200px;
-				font-family: "Roboto";
-				font-size: 18px;
-			}
-			.nav-button{
-				float: right;
-				color: white;
-				background-color: #000000;
-				border-color: white;
-				border-width: 0px;
-			}
-			.region-button{
-				float: left;
-				color: white;
-				background-color: #000000;
-				border-color: white;
-				border-width: 0px;
-			}
-			.buttons{
-				padding-top: 10px;
-			}
-			body{
-				width: 500px;
-				background-color: #1a1a1a;
-			}
-			html{
-				min-width: 0px;
-				min-height: 0px;
-			}
-			.nav{
-				background-color: #000000;
-			}
-			.header-text{
-				color: white;
-				font-family: "Roboto-Medium";
-				font-size: 25px;
-			}
-			.notify-me-btn{
-				color: white;
-				background-color: #000000;
-			}
-			#game-table{
-				margin-bottom: 10px;
-				border-collapse: collapse;
-			}
-			#game-table.game-row{
-				border-width: medium !important;
-				border-color: white !important;
-			}
-			.victor-text{
-				color: gold;
-				font-family: "Roboto-Medium";
-				font-size: 15px;
-			}
-		</style>
+		<script src="libraries/bootstrap.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="css/popup.css">
 	</head>
 	<body>
 		<div class="container-fullwidth nav">
