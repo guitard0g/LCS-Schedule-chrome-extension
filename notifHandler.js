@@ -1,4 +1,4 @@
-//eventPage.js
+//notifHandler.js
 var addNotification = function(date, time, team1, team2){
   chrome.alarms.create(date + ':' + team1 + ':' + team2, {
     when: moment(date + ':' + time, 'YYYY-MM-DD:HHmm').valueOf()

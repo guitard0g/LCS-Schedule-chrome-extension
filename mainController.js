@@ -83,9 +83,28 @@ var previousGame = function() {
   });
 }
 
+// This is an intermediary method, its used to call the databases setRegion method
+// this is because we cant use bind on the databases method or else we get a big
+// issue with contexts, this could be solved in ES6 with arrow functions.... but
+// I don't want to use browserify
+var callSetRegion = function(){
+  db.setRegion(this.newRegion);
+  // re render the view
+  db.setMoment(moment().format('YYYY-MM-DD'));
+  db.getTodaysGameday().then(function(snapshot){
+    var context = parseGame(snapshot.val().matches);
+    render(context, snapshot.key);
+    console.log(db.getRegion());
+  }, function(){
+    console.log('rejected');
+  });
+};
+
 var addListeners = function(){
   document.getElementById('next_game').addEventListener('click', nextGame);
   document.getElementById('previous_game').addEventListener('click', previousGame);
+  document.getElementById('select_na').addEventListener('click', callSetRegion.bind({ newRegion: 'NA' }));
+  document.getElementById('select_eu').addEventListener('click', callSetRegion.bind({ newRegion: 'EU' }));
 };
 
 
@@ -100,9 +119,8 @@ Handlebars.registerHelper("checkIfWon", function(team, victor) {
   }
 });
 
-db = new Database();
-
-db.getTodaysGameday().then(function(snapshot){
+// -------------------------------- APP STATE INITIALIZATON --------------------------------
+db.getPreviousGameday().then(function(snapshot){
   var context = parseGame(snapshot.val().matches);
   render(context, snapshot.key);
   db.setMoment(snapshot.key);

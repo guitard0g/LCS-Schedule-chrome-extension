@@ -59,3 +59,6 @@ function Database(){
     return ref.orderByKey().endAt(date).limitToLast(1).once('child_added');
   };
 }
+
+// -------------------------------- DATABASE INITIALIZATON --------------------------------
+db = new Database();
